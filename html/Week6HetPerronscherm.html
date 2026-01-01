@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Perronscherm</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --frame-blue: #0b5a8a;
+    --border: #0b5a8a;
+    --white: #fff;
+    --muted: #777;
+    --delay-blue: #1e63b8;
+    --cancel-red: #d83a2a;
+    --perron-bg: #e3e3e3;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .board {
+    width: 460px;
+    background: var(--frame-blue);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 6px solid #073753;
+    position: relative;
+  }
+
+  /* TERUG PIJL */
+  .back-arrow {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    color: #0b2430;
+    font-weight: bold;
+    font-size: 20px;
+    z-index: 10;
+  }
+
+  .train {
+    position: relative;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    border: 4px solid var(--frame-blue);
+  }
+
+  .train-type {
+    width: 70px;
+    min-width: 70px;
+    height: 70px;
+    background: #eee;
+    border-radius: 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .train-type small { font-size: 0.9rem; color: #555; }
+  .train-type strong { font-size: 1.3rem; }
+
+  .train-type.cancelled::before,
+  .train-type.cancelled::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 6px;
+    background: var(--cancel-red);
+    border-radius: 3px;
+    transform-origin: center;
+  }
+  .train-type.cancelled::before { transform: translate(-50%, -50%) rotate(45deg); }
+  .train-type.cancelled::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+  .train-info {
+    flex: 1;
+    padding: 0 14px;
+    position: relative;
+  }
+
+  .train-info h3 { margin: 0; font-size: 1rem; }
+  .train-info p { margin: 2px 0 4px 0; font-size: 0.85rem; color: var(--muted); }
+
+  .train-silhouette {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    margin-top: 2px;
+  }
+  .train-silhouette svg { width: 100%; height: 100%; fill: #d3d3d3; }
+
+  .max-box {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    transform: translateX(-10%) translateY(0);
+    background: var(--cancel-red);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 3px;
+    padding: 1px 3px;
+  }
+
+  .train-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 4px;
+    min-width: 70px;
+  }
+
+  .time { font-weight: 700; font-size: 1.1rem; color: #000; margin: 0; }
+  .delay { color: var(--delay-blue); font-weight: 700; margin-left: 4px; }
+  .red { color: var(--cancel-red); }
+
+  .perron {
+    background: var(--perron-bg);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    width: fit-content;
+  }
+
+  .map {
+    background: #fff;
+    border-radius: 10px;
+    border: 4px solid var(--frame-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    margin-top: 6px;
+    position: relative;
+  }
+  .map-icon { position: absolute; top: 10px; left: 10px; width: 32px; height: 32px; fill: #1e63b8; }
+
+  /* Talen */
+  .talen-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+    margin-top: 10px;
+  }
+  .talen {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    width: 180px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .taal_icon {
+    width: 33.5px;
+    height: 33.5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .active { border: 4px solid var(--border); }
+  .not-active { opacity: 0.5; border: 4px solid transparent; }
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- TERUG PIJL -->
+  <a href="week6.html" class="back-arrow">&#8592;</a>
+
+  <!-- TREINEN -->
+  <div class="train">
+    <div class="train-type"><small>IC</small><strong>2419</strong></div>
+    <div class="train-info">
+      <h3>Oostende → Namen</h3>
+      <p>Brussels-C, Brussels-N, Leuven, ...</p>
+      <div class="train-silhouette">
+        <svg viewBox="0 0 310 30">
+          <rect x="0" y="0" width="50" height="30"/>
+          <rect x="55" y="0" width="50" height="30"/>
+          <rect x="110" y="0" width="50" height="30"/>
+          <rect x="165" y="0" width="50" height="30"/>
+          <rect x="220" y="0" width="50" height="30"/>
+          <rect x="275" y="0" width="50" height="30"/>
+        </svg>
+        <div class="max-box">MAX</div>
+      </div>
+    </div>
+    <div class="train-right">
+      <div class="time">05:55</div>
+      <div class="perron">1</div>
+    </div>
+  </div>
+
+  <div class="train">
+    <div class="train-type"><small>IC</small><strong>13</strong></div>
+    <div class="train-info">
+      <h3>Kortrijk → Voeren</h3>
+      <p>Liège-Guillemins, Maastricht, Eijsden, ...</p>
+      <div class="train-silhouette">
+        <svg viewBox="0 0 310 30">
+          <rect x="0" y="0" width="50" height="30"/>
+          <rect x="55" y="0" width="50" height="30"/>
+          <rect x="110" y="0" width="50" height="30"/>
+          <rect x="165" y="0" width="50" height="30"/>
+          <rect x="220" y="0" width="50" height="30"/>
+          <rect x="275" y="0" width="50" height="30"/>
+        </svg>
+        <div class="max-box">MAX</div>
+      </div>
+    </div>
+    <div class="train-right">
+      <div class="time">09:20</div>
+      <div class="perron">2</div>
+    </div>
+  </div>
+
+  <div class="train">
+    <div class="train-type" style="background:#d8e6f8;color:#1e63b8;"><small>IC</small><strong>08</strong></div>
+    <div class="train-info">
+      <h3>Hasselt → Antwerpen-C</h3>
+      <p>Brussel-Zuid, Brussel-Noord, Mechelen, ...</p>
+      <div class="train-silhouette">
+        <svg viewBox="0 0 310 30">
+          <rect x="0" y="0" width="50" height="30"/>
+          <rect x="55" y="0" width="50" height="30"/>
+          <rect x="110" y="0" width="50" height="30"/>
+          <rect x="165" y="0" width="50" height="30"/>
+          <rect x="220" y="0" width="50" height="30"/>
+          <rect x="275" y="0" width="50" height="30"/>
+        </svg>
+        <div class="max-box">MAX</div>
+      </div>
+    </div>
+    <div class="train-right">
+      <div class="time">06:41 <span class="delay">-2</span></div>
+      <div class="perron">3</div>
+    </div>
+  </div>
+
+  <div class="train">
+    <div class="train-type cancelled"><small>IC</small><strong>1001</strong></div>
+    <div class="train-info">
+      <h3>Brussel-Zuid → Straatsburg</h3>
+      <p>Brussel-Zuid, Lille Europe, ...</p>
+      <div class="train-silhouette">
+        <svg viewBox="0 0 310 30">
+          <rect x="0" y="0" width="50" height="30"/>
+          <rect x="55" y="0" width="50" height="30"/>
+          <rect x="110" y="0" width="50" height="30"/>
+          <rect x="165" y="0" width="50" height="30"/>
+          <rect x="220" y="0" width="50" height="30"/>
+          <rect x="275" y="0" width="50" height="30"/>
+        </svg>
+        <div class="max-box">MAX</div>
+      </div>
+    </div>
+    <div class="train-right">
+      <div class="time red">--:--</div>
+      <div class="perron">4</div>
+    </div>
+  </div>
+
+  <div class="train">
+    <div class="train-type"><small>S</small><strong>4</strong></div>
+    <div class="train-info">
+      <h3>Aalst → Brussel-Noord</h3>
+      <p>Asse, Jette, Simonis, ...</p>
+      <div class="train-silhouette">
+        <svg viewBox="0 0 310 30">
+          <rect x="0" y="0" width="50" height="30"/>
+          <rect x="55" y="0" width="50" height="30"/>
+          <rect x="110" y="0" width="50" height="30"/>
+          <rect x="165" y="0" width="50" height="30"/>
+          <rect x="220" y="0" width="50" height="30"/>
+          <rect x="275" y="0" width="50" height="30"/>
+        </svg>
+        <div class="max-box">MAX</div>
+      </div>
+    </div>
+    <div class="train-right">
+      <div class="time">07:23</div>
+      <div class="perron">5</div>
+    </div>
+  </div>
+
+  <div class="train">
+    <div class="train-type"><small>IC</small><strong>09</strong></div>
+    <div class="train-info">
+      <h3>Brugge → Genk</h3>
+      <p>Gent, Brussel-Zuid, Leuven, Hasselt, ...</p>
+      <div class="train-silhouette">
+        <svg viewBox="0 0 310 30">
+          <rect x="0" y="0" width="50" height="30"/>
+          <rect x="55" y="0" width="50" height="30"/>
+          <rect x="110" y="0" width="50" height="30"/>
+          <rect x="165" y="0" width="50" height="30"/>
+          <rect x="220" y="0" width="50" height="30"/>
+          <rect x="275" y="0" width="50" height="30"/>
+        </svg>
+        <div class="max-box">MAX</div>
+      </div>
+    </div>
+    <div class="train-right">
+      <div class="time">07:42 <span class="delay">-1</span></div>
+      <div class="perron">6</div>
+    </div>
+  </div>
+
+<!-- MAP -->
+  <div class="map">
+    <svg class="map-icon" viewBox="0 0 24 24">
+      <path d="M3 6.5v13.1l6-2.4 6 2.4 6-2.4V4.5l-6 2.4-6-2.4L3 6.5zm6 11.4-4 1.6V7.9l4-1.6v11.6zm6 1.6-4-1.6V6.3l4 1.6v11.6zm2-.4V7.9l4-1.6v11.6l-4 1.6z"/>
+    </svg>
+    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="1000" height="500" fill="#fff" rx="8" ry="8"/>
+      <path d="M40 370 C180 360,260 360,360 360 C420 360,470 360,500 300 C550 220,520 180,520 140"
+            stroke="#d83a2a" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M40 240 C180 240,320 240,400 240 C480 240,560 240,620 260 C700 290,760 360,800 420"
+            stroke="#1e63b8" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M380 320 C420 300,460 260,520 260 C580 260,700 260,860 260"
+            stroke="#2fb24a" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M540 480 C540 360,540 250,540 160 C540 80,720 80,900 120"
+            stroke="#e3781a" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- TALEN -->
+  <div class="talen-container">
+    <div class="talen">
+      <div class="taal_icon active">NL</div>
+      <div class="taal_icon not-active">FR</div>
+      <div class="taal_icon not-active">DE</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

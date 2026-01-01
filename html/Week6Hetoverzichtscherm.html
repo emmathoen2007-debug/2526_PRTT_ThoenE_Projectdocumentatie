@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mid-FY Prototype - Reizigersbord</title>
+
+  <!-- Jost font -->
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --board-bg:#0b5a8a;
+      --border:#072b41;
+      --card-bg:#ffffff;
+      --muted:#6b6b6b;
+      --accent-red:#d94b43;
+      --light:#f7f9fb;
+      --dark-text:#0b2430;
+      --perron-bg:#d9d9d9;
+      font-family: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background:#000;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      color:var(--light);
+      padding:20px;
+    }
+
+    .board {
+      width:1100px;
+      max-width:98vw;
+      border-radius:12px;
+      background:linear-gradient(180deg,var(--board-bg), #0a425f);
+      padding:40px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      box-sizing:border-box;
+      border:6px solid var(--border);
+      color:var(--light);
+      position:relative;
+    }
+
+    /* Terug-pijltje */
+    .back-arrow{
+      position:absolute;
+      top:20px;
+      left:20px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      background:var(--light);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.3);
+      cursor:pointer;
+      text-decoration:none;
+      color:var(--dark-text);
+      font-weight:bold;
+      z-index:10;
+    }
+
+    .main-grid {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(7, auto);
+      gap:14px;
+      align-items:stretch;
+      margin-top:20px;
+    }
+
+    .cell {
+      background:var(--light);
+      color:var(--dark-text);
+      border-radius:6px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 14px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.12);
+      position:relative;
+    }
+
+    .tag {
+      min-width:70px;
+      background:#e9eef2;
+      border-radius:4px;
+      text-align:center;
+      font-weight:700;
+      padding:8px 0;
+      margin-right:12px;
+      line-height:1.2;
+    }
+
+    .content {
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .mainline {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight:700;
+      font-size:16px;
+    }
+
+    .subline {
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .perron {
+      position:absolute;
+      bottom:8px;
+      right:8px;
+      background:var(--perron-bg);
+      color:#000;
+      font-weight:700;
+      font-size:13px;
+      border-radius:4px;
+      width:26px;
+      height:26px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .map-icon {
+      grid-row: 4 / span 3;
+      grid-column: 2 / 3;
+      background:#ffffff;
+      border-radius:6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.12);
+      min-height:160px;
+      height:100%;
+    }
+
+    .map-icon svg {
+      width:120px;
+      height:120px;
+      opacity:0.85;
+    }
+
+    /* Talen */
+    .talen-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: row;
+      margin-top:20px;
+    }
+
+    .talen {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: white;
+      width: 180px;
+      padding: 5px;
+      border-radius: 10px;
+    }
+
+    .taal_icon{
+      width:26px;
+      height:26px;
+      border-radius: 50%;
+      cursor:pointer;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:#000;
+      font-weight:bold;
+    }
+
+    .active{
+      border: 4px solid var(--border);
+    }
+
+    .not-active{
+      opacity: 0.5;
+      border: 4px solid transparent;
+    }
+
+    .icon{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius: 50%;
+    }
+
+    @media (max-width:1000px){
+      .main-grid{ grid-template-columns:1fr; }
+      .map-icon{ min-height:200px; grid-column:1 / 2; grid-row:7 / 8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="board">
+    <a href="week6.html" class="back-arrow">&#8592;</a>
+
+    <div class="main-grid">
+      <div class="cell">
+        <div class="tag">IC<br><span style="font-weight:400">2419</span></div>
+        <div class="content">
+          <div class="mainline">
+            Oostende → Namen
+            <span style="color:var(--accent-red)">05 : 55 +7</span>
+          </div>
+          <div class="subline">Brussels-Central, Brussels-North, Leuven, ...</div>
+        </div>
+        <div class="perron">1</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">IC/S<br><span style="font-weight:400">Nr.</span></div>
+        <div class="content">
+          <div class="mainline">Bestemming <span>Tijdstip + status</span></div>
+          <div class="subline">Haltes</div>
+        </div>
+        <div class="perron">P</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">IC<br><span style="font-weight:400">13</span></div>
+        <div class="content">
+          <div class="mainline">Kortrijk → Voeren <span>09 : 20</span></div>
+          <div class="subline">Liège-Guillemins, Maastricht, Eijsden, ...</div>
+        </div>
+        <div class="perron">2</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">IC/S<br><span style="font-weight:400">Nr.</span></div>
+        <div class="content">
+          <div class="mainline">Bestemming <span>Tijdstip + status</span></div>
+          <div class="subline">Haltes</div>
+        </div>
+        <div class="perron">P</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">IC<br><span style="font-weight:400">08</span></div>
+        <div class="content">
+          <div class="mainline">Hasselt → Antwerpen-Centraal <span style="color:#0a6fb1">06 : 41 -2</span></div>
+          <div class="subline">Brussel-Zuid, Brussel-Noord, Mechelen, ...</div>
+        </div>
+        <div class="perron">3</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">IC/S<br><span style="font-weight:400">Nr.</span></div>
+        <div class="content">
+          <div class="mainline">Bestemming <span>Tijdstip + status</span></div>
+          <div class="subline">Haltes</div>
+        </div>
+        <div class="perron">P</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">IC<br><span style="font-weight:400">22</span></div>
+        <div class="content">
+          <div class="mainline">Gent-Sint-Pieters → Brussel-Zuid <span>07 : 15</span></div>
+          <div class="subline">Dendermonde, Mechelen, Vilvoorde, ...</div>
+        </div>
+        <div class="perron">4</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">S<br><span style="font-weight:400">4</span></div>
+        <div class="content">
+          <div class="mainline">Aalst → Brussel-Noord <span>07 : 23</span></div>
+          <div class="subline">Asse, Jette, Simonis, ...</div>
+        </div>
+        <div class="perron">5</div>
+      </div>
+
+      <div class="cell">
+        <div class="tag">IC<br><span style="font-weight:400">09</span></div>
+        <div class="content">
+          <div class="mainline">Brugge → Genk <span style="color:#0a6fb1">07 : 42 -1</span></div>
+          <div class="subline">Gent, Brussel-Zuid, Leuven, Hasselt, ...</div>
+        </div>
+        <div class="perron">6</div>
+      </div>
+
+      <div class="map-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#0a425f" stroke-width="3">
+          <path d="M4 16L24 8L40 16L60 8V48L40 56L24 48L4 56V16Z" fill="#dbe9f1" />
+          <path d="M24 8V48M40 16V56" />
+          <circle cx="32" cy="32" r="4" fill="#0b5a8a"/>
+          <path d="M32 12V28M32 36V52" stroke="#0b5a8a" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="talen-container">
+        <div class="talen">
+          <div class="taal_icon active">NL</div>
+          <div class="taal_icon not-active">FR</div>
+          <div class="taal_icon not-active">DE</div>
+        </div>
+    </div>
+
+  </div>
+</body>
+</html>

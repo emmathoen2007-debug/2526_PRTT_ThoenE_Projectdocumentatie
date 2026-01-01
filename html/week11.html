@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 11</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="font-serif bg-gray-100 h-screen overflow-hidden">
+
+<div class="flex h-full">
+
+    <!-- Hamburger + Home -->
+    <div class="fixed top-5 left-5 z-50 flex items-center gap-3">
+      <div id="hamburger" class="flex flex-col justify-between w-8 h-10 cursor-pointer p-1">
+        <span class="block h-0.5 w-full bg-white rounded transition-all"></span>
+        <span class="block h-0.5 w-full bg-white rounded transition-all"></span>
+        <span class="block h-0.5 w-full bg-white rounded transition-all"></span>
+      </div>
+      <a href="Overzicht.html" class="w-6 h-6 text-white hover:opacity-70">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-300 p-5 pt-20 flex flex-col transform -translate-x-64 transition-all duration-500 z-40 overflow-y-auto">
+
+      <!-- Navigation week-items met padding-top zodat eerste knop niet vastzit -->
+      <nav class="flex flex-col gap-3 pt-5">
+        <!-- Week buttons -->
+        <a href="week1.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 01</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Begin schetsen en schermen baseren op NMBS schermen
+          </span>
+        </a>
+
+        <a href="week2.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 02</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Eerste schetsen klaar, Perronscherm geïnspireerd door New York metro schermen
+          </span>
+        </a>
+
+        <a href="week3.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 03</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Kleur toegevoegd aan de schetsen, meer iconen toegevoegd voor duidelijkheid en structuur
+          </span>
+        </a>
+
+        <a href="week4.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 04</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Start prototype in Figma ook heb ik rasters ingevoegd voor structuur
+          </span>
+        </a>
+
+        <a href="week5.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 05</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Kleur toegevoegd in Figma prototype en de schermen specifieker uitgewerkt
+          </span>
+        </a>
+
+        <a href="week6.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 06</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Gestart met Visual Studio Code, dankzij de hulp van Ai en mijn vriend
+          </span>
+        </a>
+
+        <a href="week7.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 07</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            De vlaggen omgezet naar de initialen van de talen op de HTML
+          </span>
+        </a>
+
+        <a href="week8.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 08</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Geen nieuwe updates door focus op mijn inzichtstoetsen
+          </span>
+        </a>
+
+        <a href="week9.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 09</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Start met schetsen voor layout van de treinschermen op GSM formaat
+          </span>
+        </a>
+
+        <a href="week10.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 10</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            Layout schermen uitgewerkt in Figma
+          </span>
+        </a>
+
+        <a href="week11.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-400 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 11</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            De eerste interactieve knoppen ingevoegd op het prototype in Figma
+          </span>
+        </a>
+
+        <a href="week12.html" class="group relative flex items-center justify-center p-3 rounded-lg bg-gray-300 border border-gray-400 hover:bg-gray-400 transition-all duration-300 overflow-hidden">
+          <span class="text-sm font-medium text-gray-600">week 12</span>
+          <span class="absolute opacity-0 group-hover:opacity-100 text-white text-xs px-2 py-1 transition-opacity duration-300">
+            De interactieve knoppen verder uitgewerkt en een logo uitgewerkt
+          </span>
+        </a>
+
+      </nav>
+    </aside>
+
+  <!-- Main -->
+  <main class="flex-1 bg-[#0d4859] text-white overflow-y-auto relative">
+
+    <!-- Arrows -->
+    <div class="absolute top-5 right-5 flex gap-3">
+      <a href="week10.html" class="hover:opacity-70">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </a>
+      <a href="week12.html" class="hover:opacity-70">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-6xl mx-auto px-6 py-24">
+
+      <h1 class="text-5xl mb-20 text-center">Week 11</h1>
+
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+
+        <!-- Text -->
+        <div class="bg-white text-black p-10 rounded-lg shadow-lg text-lg leading-relaxed">
+          <p>
+            Deze week ben ik begonnen met het toevoegen van interactieve
+            elementen aan mijn Figma-prototype. Ik ben nog volop aan het
+            onderzoeken hoe alle interactiefuncties precies werken. Ik vind
+            het interessant om te zien hoe mijn schermen langzaam veranderen
+            in een prototype dat echt reageert.
+          </p>
+
+          <p class="mt-6">
+            De eerste interactieve knoppen zijn inmiddels toegevoegd, waardoor
+            een mogelijke gebruiker zich al beperkt kan navigeren binnen de
+            applicatie, zoals van het inlogscherm naar de verschillende
+            infoschermen.
+          </p>
+        </div>
+
+        <!-- Image -->
+        <div class="flex justify-center">
+          <img
+            src="../img/week11-schets1.png"
+            alt="Schets Week 11"
+            id="lightboxTrigger"
+            class="max-h-[420px] object-contain rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform"
+          />
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+      <footer class="fixed bottom-0 w-full py-3 bg-[#0d4859] text-white font-bold flex flex-col md:flex-row items-center justify-around gap-4 text-sm">
+        <p>&copy; 2025 Emma Thoen Grafische & Digitale Media 2 — AP hogeschool</p>
+        <p>
+          Mijn laatst gepubliceerde versie van mijn code op <a href="https://github.com/emmathoen2007-debug/2526_PRTT_ThoenE_Projectdocumentatie" target="_blank" class="underline text-blue-500 hover:text-gray-300">Github</a>
+        </p>
+      </footer>
+
+  </main>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox"
+     class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+
+  <button id="closeLightbox"
+          class="absolute top-6 right-6 text-white text-4xl font-bold">
+    &times;
+  </button>
+
+  <img
+    src="../img/week11-schets1.png"
+    class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
+    alt="Vergrote schets"
+  />
+</div>
+
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const sidebar = document.getElementById("sidebar");
+  const lightbox = document.getElementById("lightbox");
+  const trigger = document.getElementById("lightboxTrigger");
+  const closeBtn = document.getElementById("closeLightbox");
+
+  hamburger.addEventListener("click", () => {
+    sidebar.classList.toggle("-translate-x-64");
+    sidebar.classList.toggle("translate-x-0");
+  });
+
+  trigger.addEventListener("click", () => {
+    lightbox.classList.remove("hidden");
+    lightbox.classList.add("flex");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    lightbox.classList.add("hidden");
+    lightbox.classList.remove("flex");
+  });
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.add("hidden");
+      lightbox.classList.remove("flex");
+    }
+  });
+</script>
+
+</body>
+</html>
